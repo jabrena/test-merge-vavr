@@ -105,3 +105,29 @@ Actual   :ParentVavr(list=List(first, third), map=HashMap((third_key, third_valu
 
 You can simply `mvn verify`, or run manually
 [`ParentVavrTest.test`](src/test/java/net/vince/merge/test/ParentVavrTest.java).
+
+```bash
+./mvnw versions:display-dependency-updates
+./mvnw versions:display-plugin-updates
+
+ParentVavrTest.test:108 expected: 
+<ParentVavr(
+	list=List(first, third), 
+	map=HashMap((third_key, third_value), (first_key, first_overridden_value)), 
+	deepMap=HashMap(
+		(third_key, HashMap((third_nested_key, third_nested_value))), 
+		(first_key, HashMap((first_overridden_nested_key, first_overridden_nested_value)))),
+	child=ParentVavr.Child(name=overridden_name, description=original_description))
+> 
+	
+	but was: 
+	
+<ParentVavr(
+	list=List(first, third), 
+	map=HashMap((third_key, third_value), (first_key, first_overridden_value), (second_key, second_value)), deepMap=HashMap(
+		(third_key, HashMap((third_nested_key, third_nested_value))), 
+		(first_key, HashMap((first_nested_key, first_nested_value), (first_overridden_nested_key, first_overridden_nested_value))), 
+		(second_key, HashMap((second_nested_key, second_nested_value)))), 
+	child=ParentVavr.Child(name=overridden_name, description=original_description))
+>
+```

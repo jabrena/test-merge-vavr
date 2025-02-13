@@ -12,6 +12,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+//TODO replace with record in the future, currently not supported by jackson
 @Getter
 @Builder
 @ToString
