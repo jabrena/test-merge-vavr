@@ -10,7 +10,6 @@
 
   <properties>
     <java.version>23</java.version>
-    <lombok.version>1.18.36</lombok.version>
     <vavr.version>0.10.3</vavr.version>
     <jackson.version>2.18.2</jackson.version>
     <junit.version>5.7.1</junit.version>
@@ -22,12 +21,6 @@
   </properties>
 
   <dependencies>
-    <dependency>
-      <groupId>org.projectlombok</groupId>
-      <artifactId>lombok</artifactId>
-      <version>${lombok.version}</version>
-    </dependency>
-
     <dependency>
       <groupId>io.vavr</groupId>
       <artifactId>vavr</artifactId>
@@ -80,13 +73,6 @@
         <version>${maven.compiler.version}</version>
         <configuration>
           <release>${java.version}</release>
-          <annotationProcessorPaths>
-            <path>
-              <groupId>org.projectlombok</groupId>
-              <artifactId>lombok</artifactId>
-              <version>${lombok.version}</version>
-            </path>
-          </annotationProcessorPaths>
         </configuration>
       </plugin>
       <plugin>

@@ -107,9 +107,14 @@ You can simply `mvn verify`, or run manually
 [`ParentVavrTest.test`](src/test/java/net/vince/merge/test/ParentVavrTest.java).
 
 ```bash
+./mvnw clean verify
 ./mvnw versions:display-dependency-updates
 ./mvnw versions:display-plugin-updates
+```
 
+### Expected result
+
+```
 ParentVavrTest.test:108 expected: 
 <ParentVavr(
 	list=List(first, third), 

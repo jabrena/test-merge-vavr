@@ -2,23 +2,11 @@ package net.vince.merge.test;
 
 import com.fasterxml.jackson.annotation.JsonMerge;
 import com.fasterxml.jackson.annotation.OptBoolean;
+
 import java.util.List;
 import java.util.Map;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 //TODO replace with record in the future, currently not supported by jackson
-@Getter
-@Builder
-@ToString
-@EqualsAndHashCode
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class ParentJava {
 
   @JsonMerge(OptBoolean.FALSE)
@@ -33,17 +21,46 @@ public class ParentJava {
   @JsonMerge
   Child child;
 
-  @Getter
-  @Builder
-  @ToString
-  @EqualsAndHashCode
-  @NoArgsConstructor(access = AccessLevel.PRIVATE)
-  @AllArgsConstructor(access = AccessLevel.PRIVATE)
-  public static class Child {
-
-    String name;
-    String description;
-
+  private ParentJava() {
   }
 
+  private ParentJava(List<String> list, Map<String, String> map, 
+          Map<String, Map<String, String>> deepMap, Child child) {
+    this.list = list;
+    this.map = map;
+    this.deepMap = deepMap;
+    this.child = child;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    
+    ParentJava that = (ParentJava) o;
+    
+    if (list != null ? !list.equals(that.list) : that.list != null) return false;
+    if (map != null ? !map.equals(that.map) : that.map != null) return false;
+    if (deepMap != null ? !deepMap.equals(that.deepMap) : that.deepMap != null) return false;
+    return child != null ? child.equals(that.child) : that.child == null;
+  }
+
+  @Override
+  public int hashCode() {
+    int result = list != null ? list.hashCode() : 0;
+    result = 31 * result + (map != null ? map.hashCode() : 0);
+    result = 31 * result + (deepMap != null ? deepMap.hashCode() : 0);
+    result = 31 * result + (child != null ? child.hashCode() : 0);
+    return result;
+  }
+
+  @Override
+  public String toString() {
+    return "ParentVavr{" +
+           "list=" + list +
+           ", map=" + map +
+           ", deepMap=" + deepMap +
+           ", child=" + child +
+           '}';
+  }
 }
